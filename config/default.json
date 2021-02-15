@@ -1,5 +1,6 @@
 {
   "port" : 8080,
+  "jwt_secret": "udit2910",
   "database": {
     "host": "127.0.0.1:27017",
     "default_db_name": "blogs_master",
