@@ -6,7 +6,7 @@ const getUserDetails = async (query, projection, tenant) => {
   try {
     const db = await global.db.connect(tenant);
     const collection = db.model('users');
-    let response = await collection.find(query, projection).lean();
+    let response = await collection.findOne(query, projection).lean();
     console.log('response from userDetails(): %j', response);
     return response;
   } catch (error) {

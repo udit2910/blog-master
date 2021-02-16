@@ -7,12 +7,15 @@ const usersSchema = new Schema({
   },
   email: {
     type: String,
+    required: true,
+    lowercase: true,
+    index: true,
+    trim: true,
   },
-  password: {
-    type: String,
-  },
+  password: { type: String, required: true },
   name: {
     type: String,
+    required: true,
   },
   phone_no: {
     type: Number,

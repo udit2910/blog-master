@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const blogsSchema = new Schema({
   title: {
     type: String,
+    required: true,
   },
   description: {
     type: String,
@@ -13,10 +14,15 @@ const blogsSchema = new Schema({
   },
   author_id: {
     type: Number,
+    required: true,
+  },
+  is_deleted: {
+    type: Boolean,
+    default: false,
   },
   comments: [
     {
-      user_id: {
+      comment_by: {
         type: Number,
       },
       comment: {

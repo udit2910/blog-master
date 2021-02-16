@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const app = express.Router();
 const jwt = require('jsonwebtoken');
@@ -7,20 +9,21 @@ const { getUserDetails, insertUser } = require('../repositories/users-repo');
 const {
   getQuery,
   getQueryArrayForOperation,
+  getCommonProjection,
 } = require('../repositories/db-operations');
 
 app.post('/login', async (req, res) => {
   try {
     const user = await getUserDetails(
-      generateQueryForDeleteDetails(req.body),
+      generateQueryForLoginDetails(req.body),
       getCommonProjection(),
       'blogs_master'
     );
-    if (user && user.length > 0) {
-      const accessToken = jwt.sign(user[0], config.jwt_secret);
+    if (user) {
+      const accessToken = jwt.sign(user, config.jwt_secret);
       res.status(200);
       res.setHeader('token', accessToken);
-      res.json(user[0]);
+      res.json(user);
     } else {
       res.status(400).json('email/password do not match');
     }
@@ -42,18 +45,11 @@ app.post('/signUp', async (req, res) => {
   }
 });
 
-function generateQueryForDeleteDetails(reqBody) {
+function generateQueryForLoginDetails(reqBody) {
   const query = [];
   query.push(getQuery('password', '$eq', reqBody.password));
   query.push(getQuery('email', '$eq', reqBody.email));
   return getQueryArrayForOperation('$and', query);
-}
-
-function getCommonProjection() {
-  const json = {};
-  json['_id'] = false;
-  json['__v'] = false;
-  return json;
 }
 
 module.exports = app;
