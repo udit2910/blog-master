@@ -1,0 +1,34 @@
+{
+  "name": "blog-master",
+  "version": "1.0.0",
+  "description": "Backend for blogs App",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "config": "^2.0.1",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.7.3",
+    "mongoose-plugin-autoinc": "^1.1.9",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.4"
+  },
+  "author": "Udit Jadawala",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udit2910/blog-master.git"
+  },
+  "bugs": {
+    "url": "https://github.com/udit2910/blog-master/issues"
+  },
+  "homepage": "https://github.com/udit2910/blog-master#readme"
+}
