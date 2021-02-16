@@ -1,5 +1,21 @@
 # blog-master
 
+# Things we can do.
+
+1 - Haven't use any encrption module/method for password. We can use 'mongoose-bcrypt' or 'crypto-js' to encode and decode password.
+2 - system can have role like : Author (can post and edit his/her post only), User(can read and comment on the post), Admin (can have all the rights) which we can differentiate by having roles collection and user_id maped to that.
+3 - based on role, can have role validator for the APIs as a middleware.
+
+# Things I have done done.
+
+1 - Signup.
+2 - login. (JWT sign)
+3 - post a blog.
+4 - get blogs.
+5 - update the blog.
+6 - delete blog.
+7 - add comment to the blog.
+
 # Sign Up API
 
 curl --location --request POST 'localhost:8080/api/users/v1/signUp' \
