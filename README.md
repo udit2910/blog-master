@@ -1,5 +1,7 @@
 # blog-master
 
+To run the service : npm start
+
 # Things we can do.
 
 1 - Haven't use any encrption module/method for password. We can use 'mongoose-bcrypt' or 'crypto-js' to encode and decode password.

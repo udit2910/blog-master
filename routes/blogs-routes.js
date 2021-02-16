@@ -64,7 +64,11 @@ app.delete('/remove/:user_id/:blog_id', authenticateJWT, async (req, res) => {
     const query = generateQueryForDeleteDetails(req.params);
     const response = await deleteBlog(query, 'blogs_master');
     console.log('deleted details: %j , %s', response, response);
-    res.status(200).json('deleted Successfully');
+    if (response.deletedCount > 0) {
+      res.status(200).json('deleted Successfully');
+    } else {
+      res.status(204);
+    }
   } catch (error) {
     res.status(500).json(error);
     console.log('error while deleting details: %j , %s', error, error);
@@ -81,7 +85,11 @@ app.post('/update', authenticateJWT, async (req, res) => {
       'blogs_master'
     );
     console.log('updated details : %j , %s', response, response);
-    res.status(200).json('updated Successfully');
+    if (response.nModified > 0) {
+      res.status(200).json('updated Successfully');
+    } else {
+      res.status(204);
+    }
   } catch (error) {
     res.status(500).json(error);
     console.log('error while updating details: %j , %s', error, error);
@@ -99,7 +107,11 @@ app.put('/comment', authenticateJWT, async (req, res) => {
       'blogs_master'
     );
     console.log('updated details : %j , %s', response, response);
-    res.status(200).json('updated Successfully');
+    if (response.nModified > 0) {
+      res.status(200).json('comment posted Successfully');
+    } else {
+      res.status(204);
+    }
   } catch (error) {
     res.status(500).json(error);
     console.log('error while updating details: %j , %s', error, error);
@@ -113,8 +125,7 @@ function generateQueryForGetBlogs() {
 function generateQueryForUpdateDetails(reqBody) {
   const query = [];
   query.push(getQuery('blog_id', '$eq', Number(reqBody.blog_id)));
-  query.push(getQuery('comment_by', '$eq', Number(reqBody.comment_by)));
-  query.push(getQuery('comment', '$eq', Number(reqBody.comment)));
+  query.push(getQuery('author_id', '$eq', Number(reqBody.author_id)));
   return getQueryArrayForOperation('$and', query);
 }
 
